@@ -41,9 +41,9 @@ salidas, así que se conecta igual.
 
 | # | Ejemplo | Qué hace | Piezas nuevas |
 |---|---|---|---|
-| 4 | Redactor y revisor | Un modelo resume; otro señala lo que el original no respalda | Dos modelos en cadena |
-| 5 | Recordar | Un chat que recuerda la conversación | Message History |
-| 6 | Pedir o imponer | Clasifica la pregunta y responde distinto según el tipo | Smart Router, If-Else |
+| 4 | [Redactor y revisor](flujos/04-redactor-y-revisor.json) | Un modelo resume; otro señala lo que el original no respalda | Dos modelos en cadena |
+| 5 | [Recordar](flujos/05-recordar.json) | Un chat que recuerda la conversación | Message History |
+| 6 | [Pedir o imponer](flujos/06-pedir-o-imponer.json) | Una regla fija para los mensajes con un DNI y un modelo que clasifica las consultas | If-Else, Smart Router |
 
 ### Nivel 3. Conocimiento
 
