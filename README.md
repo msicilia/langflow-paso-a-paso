@@ -12,6 +12,15 @@ dentro sus explicaciones, en notas sobre el lienzo: qué hace cada caja y qué p
 - **Langflow Desktop.** Los ejemplos están hechos con la versión 1.12.2.
 - **Un modelo.** Los ejemplos usan **LM Studio** con su servidor local, pero sirve
   cualquier otro proveedor: Ollama, Groq, OpenAI…
+- **Desde el ejemplo 9, un modelo de embeddings** en LM Studio, como
+  *nomic-embed-text-v1.5*.
+- **Desde el ejemplo 11, un modelo que sepa llamar a herramientas.** En LM Studio
+  llevan el icono de un martillo (*tool use*). Los ejemplos se han probado con
+  **Gemma 4 E4B**.
+- **Contexto suficiente.** Los documentos y lo que devuelven las herramientas ocupan
+  contexto. Si LM Studio da un error de contexto (*exceeds the available context
+  size*), vuelve a cargar el modelo con más **longitud de contexto**, por ejemplo
+  16.384.
 
 ## Cómo abrir un ejemplo
 
@@ -45,31 +54,44 @@ salidas, así que se conecta igual.
 | 5 | [Recordar](flujos/05-recordar.json) | Un chat que recuerda la conversación | Message History |
 | 6 | [Pedir o imponer](flujos/06-pedir-o-imponer.json) | Una regla fija para los mensajes con un DNI y un modelo que clasifica las consultas | If-Else, Smart Router |
 
-### Nivel 3. Conocimiento
+### Nivel 3. Traer información
 
 | # | Ejemplo | Qué hace | Piezas nuevas |
 |---|---|---|---|
-| 7a | Pregunta a tu documento | RAG en pocas cajas | Knowledge |
-| 7b | El RAG por dentro | El mismo RAG, pieza a pieza | Read File, Split Text, Embeddings, Chroma DB |
+| 7 | [Un documento entero](flujos/07-un-documento-entero.json) | Responde con un documento completo dentro del prompt | Read File |
+| 8 | [La web y las API](flujos/08-la-web-y-las-api.json) | Busca publicaciones en OpenAlex y las presenta en una lista | Dynamic Create Data, API Request, Parser |
+| 9 | [Pregunta a tus documentos](flujos/09-pregunta-a-tus-documentos.json) | RAG sobre varias normativas de la UAH | Split Text, LM Studio Embeddings, Chroma DB |
+| 10 | [El RAG por dentro](flujos/10-el-rag-por-dentro.json) | El mismo RAG, con los fragmentos recuperados a la vista | Ajustes de troceado y de *k* |
 
 ### Nivel 4. Herramientas y agentes
 
 | # | Ejemplo | Qué hace | Piezas nuevas |
 |---|---|---|---|
-| 8 | Una herramienta | Un agente con una calculadora | Agent, Calculator |
-| 9 | Elegir entre varias | Busca, lee una web, consulta la fecha o calcula | Web Search, URL, Wikipedia, Current Date |
-| 10 | Tu RAG como herramienta | El agente decide si busca en tus documentos, en la web o en ninguno | Knowledge o Chroma DB como herramienta |
-| 11 | Herramientas que actúan | Guarda un informe en un fichero solo si una persona lo aprueba | Write File, Human Input |
-| 12 | Herramientas de otros | Usa las herramientas de un servidor MCP público | MCP Tools |
-| 13 | Varios agentes | Un coordinador encarga a un agente que busque y a otro que escriba | Agent como herramienta |
+| 11 | [Una herramienta](flujos/11-una-herramienta.json) | Un agente con una calculadora | Agent, Calculator, Tool Mode |
+| 12 | [Elegir entre varias](flujos/12-elegir-entre-varias.json) | Busca, lee una web, consulta la Wikipedia, la fecha o calcula | Web Search, URL, Wikipedia, Current Date |
+| 13 | [Tu RAG como herramienta](flujos/13-tu-rag-como-herramienta.json) | El agente decide si busca en tus documentos, en la web o en ninguno | Chroma DB como herramienta |
+| 14 | [Herramientas que actúan](flujos/14-herramientas-que-actuan.json) | Guarda un informe en un fichero solo cuando una persona escribe GUARDAR | Write File, If-Else como aprobación |
+| 15 | [Herramientas de otros](flujos/15-herramientas-de-otros.json) | Usa las herramientas del servidor MCP público de CoinGecko | MCP Tools |
+| 16 | [Varios agentes](flujos/16-varios-agentes.json) | Un coordinador encarga a un agente que busque y a otro que escriba | Agent como herramienta |
 
-### Nivel 5. Fiable y entregable
+### Nivel 5. Probar y proteger
 
 | # | Ejemplo | Qué hace | Piezas nuevas |
 |---|---|---|---|
-| 14 | Defensa en profundidad | El RAG protegido contra instrucciones ocultas, con una batería de pruebas | Guardrails, Batch Run |
+| 17 | [Tu batería de pruebas](flujos/17-tu-bateria-de-pruebas.json) | Diez preguntas con su respuesta esperada, de golpe, y un modelo que las corrige | Batch Run |
+| 18 | [Defensa en profundidad](flujos/18-defensa-en-profundidad.json) | El RAG con cuatro capas de protección frente a un documento trampa | Guardrails |
 
-Los ejemplos sin enlace se irán publicando a lo largo del curso.
+## Datos de los ejemplos
+
+En [`datos/`](datos/) están los ficheros que usan algunos ejemplos:
+
+- [`preguntas-permanencia.csv`](datos/preguntas-permanencia.csv): diez preguntas sobre la
+  Normativa de permanencia de la UAH, con su respuesta esperada (ejemplo 17).
+- [`aviso-biblioteca.md`](datos/aviso-biblioteca.md): un aviso con una instrucción
+  escondida para el asistente, un documento trampa (ejemplo 18).
+
+Las normativas de la UAH no están en el repositorio: cada ejemplo enlaza a la web de la
+universidad para descargarlas.
 
 ## Licencia
 
